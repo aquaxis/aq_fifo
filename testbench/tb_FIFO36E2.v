@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module tb_sample_fifo;
+module tb_FIFO36E2;
 
   reg RST;
   reg WRCLK, RDCLK;
@@ -51,16 +51,16 @@ module tb_sample_fifo;
     wait(!RST);
     wait(!RDRSTBUSY);
     wait(!WRRSTBUSY);
-    @(posedge WRCLK);
+    @(negedge WRCLK);
 
     for(i=0;i<512;i=i+1) begin
       WREN = 1;
       DIN  = 64'hFEDCBA98_76543210 + i;
-      @(posedge WRCLK);
+      @(negedge WRCLK);
     end
     WREN = 0;
     DIN  = 64'd0;
-    @(posedge WRCLK);
+    @(negedge WRCLK);
 
   end
 
